@@ -19,7 +19,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Building...'
+                echo 'Building...1'
                 sh 'lein deps'
                 sh 'npm install'
                 sh 'lein clean'
