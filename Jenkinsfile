@@ -30,8 +30,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'docker run -it -v /var/run/docker.sock:/var/run/docker.sock docker'
-                sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
+                sh 'sudo docker -v /var/run/docker.sock:/var/run/docker.sock build -f test/resources/Dockerfile -t mydb:latest .'
                 sh 'docker run -d \
                                 --name db \
                                 -p 5432:5432 \
