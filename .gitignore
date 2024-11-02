@@ -156,3 +156,4 @@ target/uberjar/testapp-0.1.0-SNAPSHOT.jar
 /.idea/modules.xml
 /testapp.iml
 /.idea/vcs.xml
+/minikube-linux-amd64
