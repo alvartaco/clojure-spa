@@ -30,8 +30,8 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'sudo docker build -v /var/run/docker.sock:/var/run/docker.sock -f test/resources/Dockerfile -t mydb:latest .'
-                sh 'docker run -d \
+                sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
+                sh 'sudo docker run -d \
                                 --name db \
                                 -p 5432:5432 \
                                 -e POSTGRES_USER=user \
@@ -40,8 +40,8 @@ pipeline {
                                 mydb:latest'
                 sh 'lein test :unit'
                 sh 'lein test :integration'
-                sh 'docker stop db'
-                sh 'docker rm db'
+                sh 'sudo docker stop db'
+                sh 'sudo docker rm db'
             }
         }
 
