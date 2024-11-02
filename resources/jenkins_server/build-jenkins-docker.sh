@@ -4,7 +4,8 @@
 docker build -t myjenkins .
 
 # Start the container using docker
-docker run -u 0 --privileged --name jenkins_container -it -d  \
+docker run -d \
+      --name jenkins_container \
       -p 8080:8080 \
       -p 50000:50000 \
       -v /var/run/docker.sock:/var/run/docker.sock \
