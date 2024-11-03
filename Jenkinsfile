@@ -60,7 +60,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to Minikube') {
+        stage('Deploy to Minikube.') {
             steps {
                 withCredentials([file(credentialsId: 'vault-key', variable: 'VAULT_PASSWORD_FILE')]) {
                     sh 'ansible-vault decrypt $(pwd)/resources/k8s/new-config --vault-password-file=$VAULT_PASSWORD_FILE'
