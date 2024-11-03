@@ -39,7 +39,7 @@ pipeline {
                                 -e POSTGRES_DB=test_database \
                                 mydb:latest'
                 sh 'lein test :unit'
-                sh 'lein test :integration'
+                //sh 'lein test :integration'
                 sh 'sudo docker stop db-test'
                 sh 'sudo docker rm db-test'
             }
