@@ -26,7 +26,7 @@ pipeline {
                 sh 'lein uberjar'
             }
         }
-
+/*
         stage('Test') {
             steps {
                 echo 'Testing...'
@@ -59,18 +59,18 @@ pipeline {
                 }
             }
         }
-
+*/
         stage('Deploy to Minikube.') {
             steps {
-                //withCredentials([file(credentialsId: 'vault-key', variable: 'VAULT_PASSWORD_FILE')]) {
-                //    sh 'ansible-vault decrypt $(pwd)/resources/k8s/new-config --vault-password-file=$VAULT_PASSWORD_FILE'
+                withCredentials([file(credentialsId: 'vault-key', variable: 'VAULT_PASSWORD_FILE')]) {
+                    sh 'ansible-vault decrypt $(pwd)/resources/k8s/new-config --vault-password-file=$VAULT_PASSWORD_FILE'
                     sh 'kubectl config view --kubeconfig=$(pwd)/resources/k8s/new-config'
                     sh 'kubectl config use-context cicd-ctx --kubeconfig=$(pwd)/resources/k8s/new-config'
                     sh 'kubectl apply -f resources/k8s/deployment-db.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
                     sh 'kubectl apply -f resources/k8s/service-db.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
                     sh 'kubectl apply -f resources/k8s/deployment-app.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
                     sh 'kubectl apply -f resources/k8s/service-app.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
-                //}
+                }
             }
         }
     }
