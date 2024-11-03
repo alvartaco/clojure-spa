@@ -32,7 +32,7 @@ pipeline {
                 echo 'Testing...'
                 sh 'sudo docker build -f test/resources/Dockerfile -t mydb:latest .'
                 sh 'sudo docker run -d \
-                                --name db \
+                                --name db-test \
                                 -p 5432:5432 \
                                 -e POSTGRES_USER=user \
                                 -e POSTGRES_PASSWORD=password \
@@ -40,8 +40,8 @@ pipeline {
                                 mydb:latest'
                 sh 'lein test :unit'
                 sh 'lein test :integration'
-                sh 'sudo docker stop db'
-                sh 'sudo docker rm db'
+                sh 'sudo docker stop mydb:latest'
+                sh 'sudo docker rm mydb:latest'
             }
         }
 
