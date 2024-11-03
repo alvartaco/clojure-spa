@@ -40,8 +40,8 @@ pipeline {
                                 mydb:latest'
                 sh 'lein test :unit'
                 sh 'lein test :integration'
-                sh 'sudo docker stop mydb:latest'
-                sh 'sudo docker rm mydb:latest'
+                sh 'sudo docker stop db-test'
+                sh 'sudo docker rm db-test'
             }
         }
 
