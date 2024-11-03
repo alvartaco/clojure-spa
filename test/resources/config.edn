@@ -25,5 +25,5 @@
         :database-name "test_database"
         :username "user"
         :password "password"
-        :server-name "db"
+        :server-name "db-test"
         :port-number 5432}}
