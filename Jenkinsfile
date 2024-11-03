@@ -51,12 +51,12 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'DOCKER_HUB_CREDENTIALS', passwordVariable: 'DOCKER_HUB_PASSWORD', usernameVariable: 'DOCKER_HUB_USER')]) {
                     sh 'sudo docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD'
                     sh 'sudo docker build -f resources/db/Dockerfile -t clojure-spa-db .'
-                    sh 'sudo docker tag clojure-spa-db cghael/clojure-spa-db:latest'
-                    sh 'sudo docker push cghael/clojure-spa-db:latest'
+                    sh 'sudo docker tag clojure-spa-db alvartaco/clojure-spa-db:latest'
+                    sh 'sudo docker push alvartaco/clojure-spa-db:latest'
 
                     sh 'sudo docker build . -t clojure-spa-app'
-                    sh 'sudo docker tag clojure-spa-app cghael/clojure-spa-app:latest'
-                    sh 'sudo docker push cghael/clojure-spa-app:latest'
+                    sh 'sudo docker tag clojure-spa-app alvartaco/clojure-spa-app:latest'
+                    sh 'sudo docker push alvartaco/clojure-spa-app:latest'
                 }
             }
         }
