@@ -10,5 +10,4 @@ docker run -it -d \
       -p 50000:50000 \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v $(which minikube):/usr/bin/minikube \
-      -v $(which kubectl):/usr/bin/kubectl \
-       -v jenkins_home:/var/jenkins_home myjenkins:latest
+      -v jenkins_home:/var/jenkins_home myjenkins:latest

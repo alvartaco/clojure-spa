@@ -16,6 +16,14 @@ RUN apt-get install -y nodejs
 RUN apt-get install -y npm
 RUN apt-get install -y git
 
+# Install prerequisities for Ansible
+RUN apt-get update
+RUN apt-get -y install python3 python3-nacl python3-pip libffi-dev ansible-core
+
+RUN curl -LO https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.9/2024-01-04/bin/linux/amd64/kubectl && \
+    cp kubectl /usr/local/bin/kubectl && \
+    chmod +x /usr/local/bin/kubectl
+
 RUN apt-get update -qq \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
