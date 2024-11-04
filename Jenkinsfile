@@ -59,7 +59,7 @@ pipeline {
                 }
             }
         }
-*/
+
         stage('Deploy to Minikube.') {
             steps {
                 withCredentials([file(credentialsId: 'vault-key', variable: 'VAULT_PASSWORD_FILE')]) {
@@ -71,6 +71,17 @@ pipeline {
                     sh 'kubectl apply -f resources/k8s/deployment-app.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
                     sh 'kubectl apply -f resources/k8s/service-app.yaml --kubeconfig=$(pwd)/resources/k8s/new-config'
                 }
+            }
+        }
+*/
+        stage('Deploy to Minikube.') {
+            steps {
+                    sh 'kubectl config set-context minikube'
+                    sh 'kubectl create ns alvartaco-clojure-spa'
+                    sh 'kubectl -n alvartaco-clojure-spa apply -f resources/k8s/deployment-db.yaml'
+                    sh 'kubectl -n alvartaco-clojure-spa apply -f resources/k8s/service-db.yaml'
+                    sh 'kubectl -n alvartaco-clojure-spa apply -f resources/k8s/deployment-app.yaml'
+                    sh 'kubectl -n alvartaco-clojure-spa apply -f resources/k8s/service-app.yaml'
             }
         }
     }
