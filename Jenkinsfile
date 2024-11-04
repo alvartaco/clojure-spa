@@ -64,7 +64,7 @@ pipeline {
             steps {
                 withCredentials([file(credentialsId: 'vault-key', variable: 'VAULT_PASSWORD_FILE')]) {
                     sh 'ansible-vault decrypt resources/k8s/alvartaco-config --vault-password-file=$VAULT_PASSWORD_FILE'
-                    sh 'kubectl config view --kubeconfig=$(pwd)/resources/k8s/alvartaco-config'
+                    sh 'kubectl config view --kubeconfig=resources/k8s/alvartaco-config'
                     sh 'kubectl config use-context cicd-ctx --kubeconfig=$(pwd)/resources/k8s/alvartaco-config'
                     sh 'kubectl apply -f resources/k8s/deployment-db.yaml --kubeconfig=$(pwd)/resources/k8s/alvartaco-config'
                     sh 'kubectl apply -f resources/k8s/service-db.yaml --kubeconfig=$(pwd)/resources/k8s/alvartaco-config'
